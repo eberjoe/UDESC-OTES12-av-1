@@ -25,7 +25,7 @@ export default function Home() {
         </Button>
         <CreateModal
           visible={createModalVisible}
-          handleCancel={() => setCreateModalVisible(false)}
+          handleClose={() => setCreateModalVisible(false)}
         />
       </main>
 

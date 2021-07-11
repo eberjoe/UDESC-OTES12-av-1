@@ -18,6 +18,14 @@ export type SupportTicket = {
   phone: string;
 };
 
+export type TicketModel = {
+  type: number;
+  startTimestamp: string;
+  endTimestamp?: string;
+  location: number;
+  telephone: string;
+};
+
 export const Locations = [
   { cityName: 'Berlim', countryName: 'Alemanha', timezone: 'Europe/Berlin' },
   {

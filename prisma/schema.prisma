@@ -10,11 +10,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Ticket {
+model ticket {
   id Int @id @default(autoincrement())
   type Int
   startTimestamp String
   endTimestamp String?
   location Int
-  Telephone String?
+  telephone String?
 }

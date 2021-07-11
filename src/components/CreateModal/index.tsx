@@ -1,23 +1,37 @@
 import { Form, Input, Modal, Select, Space } from 'antd';
+import axios from 'axios';
 import { Locations, SupportChannel } from '../../types';
 
 type CreateModalProps = {
   visible: boolean;
-  handleCancel: () => void;
+  handleClose: () => void;
 };
 
-export const CreateModal = ({ visible, handleCancel }: CreateModalProps) => {
+export const CreateModal = ({ visible, handleClose }: CreateModalProps) => {
   const [form] = Form.useForm();
 
-  const handleOk = () => {
-    console.log('OK', form.getFieldsValue());
+  const handleOk = async () => {
+    try {
+      const res = await (
+        await axios.post('/api/create-ticket', {
+          type: form.getFieldValue('type'),
+          startTimestamp: new Date(),
+          location: form.getFieldValue('location'),
+          telephone: form.getFieldValue('telephone')
+        })
+      ).data;
+      console.log(res);
+    } catch (error) {
+      console.error('A problem occurred while trying to save a ticket', error);
+    }
+    handleClose();
   };
 
   return (
     <Modal
       visible={visible}
       onCancel={() => {
-        handleCancel();
+        handleClose();
         form.resetFields();
       }}
       title="Novo Chamado"
@@ -52,7 +66,7 @@ export const CreateModal = ({ visible, handleCancel }: CreateModalProps) => {
               }))}
             />
           </Form.Item>
-          <Form.Item name="phone" label="Telefone para contato">
+          <Form.Item name="telephone" label="Telefone para contato">
             <Input />
           </Form.Item>
         </Space>
