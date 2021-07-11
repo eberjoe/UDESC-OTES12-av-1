@@ -9,3 +9,12 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Ticket {
+  id Int @id @default(autoincrement())
+  type Int
+  startTimestamp String
+  endTimestamp String?
+  location Int
+  Telephone String?
+}
